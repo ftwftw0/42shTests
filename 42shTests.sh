@@ -175,6 +175,24 @@ function run_expected_to
   esac
 }
 
+function run_expected_to_not
+{
+  shift 1
+  local EXPECTED_TO_CMD="${1}"
+  shift 1
+  local -a EXPECTED_TO_ARGS='(${@})'
+
+  eval "run_verb_${EXPECTED_TO_CMD}"
+  case "${?}" in
+    1)
+      printf "${C_GREEN}  √ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+    0)
+      printf "${C_RED}  ~ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+    2)
+      printf "${C_RED} [!] INVALID TEST COMMAND: ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+  esac
+}
+
 function run_might
 {
   shift 1
@@ -187,6 +205,24 @@ function run_might
     0)
       printf "${C_GREEN}  √ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
     1)
+      printf "${C_YELLOW}  ~ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+    2)
+      printf "${C_RED} [!] INVALID TEST COMMAND: ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+  esac
+}
+
+function run_might_not
+{
+  shift 1
+  local EXPECTED_TO_CMD="${1}"
+  shift 1
+  local -a EXPECTED_TO_ARGS=${@}
+
+  eval "run_verb_${EXPECTED_TO_CMD}"
+  case "${?}" in
+    1)
+      printf "${C_GREEN}  √ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
+    0)
       printf "${C_YELLOW}  ~ ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
     2)
       printf "${C_RED} [!] INVALID TEST COMMAND: ${EXPECTED_STD_NAME} %s${C_CLEAR}\n" "$(eval echo ${LINE})" ;;
