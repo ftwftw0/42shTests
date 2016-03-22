@@ -2,4 +2,4 @@
 ;
 ;
 ;
-/bin/echo TOKEN
+/bin/echo ${GLOBAL_TOKEN}
