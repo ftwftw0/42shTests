@@ -4,4 +4,4 @@ ln -s symbolic_link2 symbolic_link3
 ln -s symbolic_link3 symbolic_link1
 
 rm -f display_pwd
-gcc -Wall -Werror -Wextra ${GLOBAL_INSTALLDIR}/spec/support/display-pwd/main.c -o display_pwd
+gcc -Wall -Werror -Wextra ${GLOBAL_INSTALLDIR}/support/display-pwd/main.c -o display_pwd
