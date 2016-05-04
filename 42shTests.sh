@@ -71,29 +71,9 @@ function run_verb_be_empty
   fi
 }
 
-function run_verb_be_filled
-{
-  if [ "$(awk '{print}' "${RESPONSE}")" != "" ]
-  then
-    return 0
-  else
-    return 1
-  fi
-}
-
 function run_verb_have_nb_of_lines
 {
   if [ "$(awk 'END {printf NR}' "${RESPONSE}")" == "${EXPECTED_TO_ARGS[0]}" ]
-  then
-    return 0
-  else
-    return 1
-  fi
-}
-
-function run_verb_have_not_regexp
-{
-  if [ "$(awk -v regexp="${EXPECTED_TO_ARGS[0]}" '$0 ~ regexp {print}' "${RESPONSE}")" == "" ]
   then
     return 0
   else
